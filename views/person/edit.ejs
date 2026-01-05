@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/person">
+                <i class="bi bi-people-fill me-2"></i>
+                Person Management System
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/person">
+                            <i class="bi bi-list-ul me-1"></i>
+                            All People
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/person/create">
+                            <i class="bi bi-person-plus-fill me-1"></i>
+                            Add Person
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-warning text-dark">
+                        <h4 class="mb-0">
+                            <i class="bi bi-pencil-square me-2"></i>
+                            Edit Person
+                        </h4>
+                    </div>
+
+                    <div class="card-body">
+                        <!-- Error Messages -->
+                        <% if (errors && errors.length> 0) { %>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong><i class="bi bi-exclamation-triangle me-2"></i>Validation Errors:</strong>
+                                <ul class="mb-0 mt-2">
+                                    <% errors.forEach(error=> { %>
+                                        <li>
+                                            <%= error %>
+                                        </li>
+                                        <% }); %>
+                                </ul>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                            <% } %>
+
+                                <!-- Edit Form -->
+                                <form action="/person/update/<%= person._id %>" method="POST" novalidate>
+                                    <!-- Name Field -->
+                                    <div class="mb-3">
+                                        <label for="name" class="form-label">
+                                            <i class="bi bi-person me-1"></i>
+                                            Name <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="text" class="form-control" id="name" name="name"
+                                            value="<%= person.name %>" required minlength="2" maxlength="100"
+                                            placeholder="Enter full name">
+                                    </div>
+
+                                    <!-- Age Field -->
+                                    <div class="mb-3">
+                                        <label for="age" class="form-label">
+                                            <i class="bi bi-calendar me-1"></i>
+                                            Age <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="number" class="form-control" id="age" name="age"
+                                            value="<%= person.age %>" required min="0" max="150"
+                                            placeholder="Enter age">
+                                    </div>
+
+                                    <!-- Gender Field -->
+                                    <div class="mb-3">
+                                        <label for="gender" class="form-label">
+                                            <i class="bi bi-gender-ambiguous me-1"></i>
+                                            Gender <span class="text-danger">*</span>
+                                        </label>
+                                        <select class="form-select" id="gender" name="gender" required>
+                                            <option value="" disabled>Select gender</option>
+                                            <option value="Male" <%=person.gender==='Male' ? 'selected' : '' %>>
+                                                Male
+                                            </option>
+                                            <option value="Female" <%=person.gender==='Female' ? 'selected' : '' %>>
+                                                Female
+                                            </option>
+                                            <option value="Other" <%=person.gender==='Other' ? 'selected' : '' %>>
+                                                Other
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Mobile Number Field -->
+                                    <div class="mb-3">
+                                        <label for="mobileNumber" class="form-label">
+                                            <i class="bi bi-phone me-1"></i>
+                                            Mobile Number <span class="text-danger">*</span>
+                                        </label>
+                                        <input type="tel" class="form-control" id="mobileNumber" name="mobileNumber"
+                                            value="<%= person.mobileNumber %>" required pattern="\d{10}"
+                                            placeholder="Enter 10-digit mobile number">
+                                        <div class="form-text">
+                                            <i class="bi bi-info-circle me-1"></i>
+                                            Enter exactly 10 digits (e.g., 9876543210)
+                                        </div>
+                                    </div>
+
+                                    <!-- Form Actions -->
+                                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                                        <a href="/person" class="btn btn-secondary">
+                                            <i class="bi bi-x-circle me-1"></i>
+                                            Cancel
+                                        </a>
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="bi bi-check-circle me-1"></i>
+                                            Update Person
+                                        </button>
+                                    </div>
+                                </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-muted py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">
+                <i class="bi bi-code-slash"></i>
+                Person Management System &copy; 2026
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Environment variables (IMPORTANT - contains MongoDB password!)
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+test-connection.js
