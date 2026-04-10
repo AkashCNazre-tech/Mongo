@@ -1,6 +1,5 @@
 # Person Management System
-
-A full-stack CRUD application built with Node.js, Express, MongoDB (Mongoose), and EJS for managing person records.
+Hi Akash
 
 ## Features
 
