@@ -2,8 +2,7 @@
 Hi Akash
 
 ## Features
-
-- ✅ Create, Read, Update, Delete (CRUD) operations for Person records
+Hi this Akash C Nazre i changed
 - ✅ Server-side rendering with EJS templates
 - ✅ MongoDB database with Mongoose ODM
 - ✅ Form validation (client-side and server-side)
